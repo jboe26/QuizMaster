@@ -24,42 +24,35 @@
         <span class="navbar-brand navbar1">Welcome to Quizzly</span>
     </nav> -->
     <span style="display: inline;">
-        <a href="./index.html"><button style="height:40px;color: black;">Back to Home</button></a>
-        <a href="./register.html"><button style="height:40px;width:130px;color: black;">Register</button></a>
+        <a href="./signup.html"><button style="height:40px;width:130px;color: black;">Need to SIGNUP?</button></a>
     </span>
     <div class="container">
         <div class="d-flex justify-content-center h-100">
             <div class="card">
                 <div class="card-header">
-                    <h3>Welcome to Quizzly</h3>
+                    <h3>Login to Quiz Master</h3>
 
                 </div>
                 <div class="card-body">
-                    <br>
-                    <div id="login" method="post" action="/login">
+                    <form id="login" method="post" action="/login">
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="email" id="email">
+                            <input type="text" class="form-control" placeholder="Username" id="logusername" name="logusername">
 
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control" placeholder="password" id="password">
+                            <input type="password" class="form-control" placeholder="password" id="logpassword" name="logpassword">
                         </div>
-
-                        <div class="form-group">
-                            <button type="button" value="Login"class="btn text-align: center; login_btn" id="loginBtn" class="btn btn-warning">Login</button>
-                            
-                        </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
-                </div>
                 <div class="card-footer">
                     <div class="d-flex justify-content-center links" id="register">
-                        <p>Don't have an account? <a href="register.html"> Register</a> </p>
+                        <p>Don't have an account? <a href="signup.html"> Need to SIGNUP?</a> </p>
                         
                     </div>
                 </div>
@@ -70,6 +63,19 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
+  <!-- <script type="text/javascript">
+    var usernameField = document.getElementById('logusername')
+    var passwordField = document.getElementById('logpassword')
+    var form = document.getElementById('login')
+    function validateMyForm() {
+      if (usernameField.value === '' || passwordField === '') {
+        alert("Enter password");
+      } else{
+        form.submit()
+      }
+    }
+
+  </script> -->
     <script src="./js/login.js"></script>
 </body>
 

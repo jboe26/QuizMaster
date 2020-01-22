@@ -71,6 +71,8 @@ app.post("/signup", function (req, res, next) {
 app.post("/login", function (req, res, next) {
   // attempt to authenticate user
   User.authenticate(req.body.logusername, req.body.logpassword, function (error, user, reason) {
+    console.log('server.js', req.body.logusername);
+    console.log('server.js', req.body.logpassword);
     if (error || !user) {
       var reasons = User.failedLogin;
         switch (reason) {
@@ -94,7 +96,7 @@ app.post("/login", function (req, res, next) {
       // return next(error);
     } else {
       console.log('login success');
-      return res.sendStatus(200);
+      return res.redirect("/main.html");
     }
   });
 }); 
