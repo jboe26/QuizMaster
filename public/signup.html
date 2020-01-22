@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Quiz Master | SIGNUP</title>
+
+    <!--Bootsrap 4 CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!--Google Fonts CDN-->
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Montserrat+Alternates&display=swap" rel="stylesheet">
+
+    <!--Custom styles-->
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+   
+</head>
+
+<body>
+    <!-- <nav class="navbar">
+        <span class="navbar-brand navbar1">Quizzly</span>
+    </nav> -->
+    <span style="display: inline;">
+        <a href="./index.html"><button style="height:40px;color: black;">Back to Home</button></a>
+        <a href="login.html"><button style="height:40px;width:130px;color: black;">Login</button></a>
+    </span>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Register for Quizzly</h3>
+
+                </div>
+                <div class="card-body">
+                    <form id="signup" method="post" action="/signup">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                            </div>
+                            <input type="text" class="form-control is-valid" placeholder="firstname" id="firstname" name="firstname"
+                                required>
+                        </div>
+
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                            </div>
+                            <input type="text" class="form-control is-valid" placeholder="lastname" id="lastname" name="lastname"
+                                required>
+                        </div>
+
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                            </div>
+                            <input type="email" class="form-control is-valid" placeholder="email" id="email" name="email"
+                            required>
+                        </div>
+
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="username" id="username" name="username" required>
+                        </div>
+
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="password" id="password" name="password" required>
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Confirm password" id="password_Conf" name="password_Conf" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <script src="./js/signup.js"></script>
+    <script type="text/javascript">
+        var passwordField = document.getElementById('password')
+        var passwordConfirmField = document.getElementById('password_Conf')
+        var form = document.getElementById('signup')
+        function validateMyForm() {
+          if (passwordField.value != passwordConfirmField.value) {
+            alert("Passwords do not match. Please try again.");
+          } else {
+            form.submit()
+          }
+        }
+    
+      </script>
+</body>
+
+</html>

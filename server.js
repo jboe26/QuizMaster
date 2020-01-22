@@ -48,12 +48,14 @@ app.use(express.static(__dirname + "/public/profile.html"));
 
 // Signup Route to post our form submission to mongoDB via mongoose
 app.post("/signup", function (req, res, next) {
-  if (req.body.password !== req.body.passwordConf) {
+    console.log(req.body)
+  if (req.body.password !== req.body.password_Conf) {
     var err = new Error('Passwords do not match.');
     err.status = 400;
     res.send("passwords dont match");
     return next(err);
   }
+  console.log(req.body);
   // Create a new user using req.body
   User.create(req.body)
     .then(function (dbUser) {
