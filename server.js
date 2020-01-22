@@ -48,21 +48,18 @@ app.use(express.static(__dirname + "/public/profile.html"));
 
 // Signup Route to post our form submission to mongoDB via mongoose
 app.post("/signup", function (req, res, next) {
-    console.log(req.body)
   if (req.body.password !== req.body.password_Conf) {
     var err = new Error('Passwords do not match.');
     err.status = 400;
     res.send("passwords dont match");
     return next(err);
   }
-  console.log(req.body);
   // Create a new user using req.body
   User.create(req.body)
-    .then(function (dbUser) {
+    .then(function () {
       // If saved successfully, send the the new User document to the client
-      res.json(dbUser);
       // Redirect to html page
-      // res.redirect("/profile");
+     res.redirect("/main.html");
     })
     .catch(function (err) {
       // If an error occurs, send the error to the client
@@ -74,8 +71,6 @@ app.post("/signup", function (req, res, next) {
 app.post("/login", function (req, res, next) {
   // attempt to authenticate user
   User.authenticate(req.body.logusername, req.body.logpassword, function (error, user, reason) {
-    console.log('server.js', req.body.logusername);
-    console.log('server.js', req.body.logpassword);
     if (error || !user) {
       var reasons = User.failedLogin;
         switch (reason) {
