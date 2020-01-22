@@ -16,22 +16,26 @@
     <link href="https://fonts.googleapis.com/css?family=Audiowide|Montserrat+Alternates&display=swap" rel="stylesheet">
 
     <!--Custom styles-->
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="./css/app.css">
+    <link rel="stylesheet" type="text/css" href="./css/login.css">
 </head>
 
 <body>
-    <!-- <nav class="navbar">
-        <span class="navbar-brand navbar1">Welcome to Quizzly</span>
-    </nav> -->
-    <span style="display: inline;">
-        <a href="./signup.html"><button style="height:40px;width:130px;color: black;">Need to SIGNUP?</button></a>
-    </span>
-    <div class="container">
+    <header>
+        <div class="container">
+            <nav class="navbar fixed-top navbar-dark bg-dark">
+                <span class="navbar-text text-center">
+                    <h1>LOGIN to Quiz Master</h1>
+                </span>
+                <a class="navbar-brand" href="./signup.html">SIGNUP</a>
+            </nav>
+        </div>
+    </header>
+    <div id="main-container" class="container">
         <div class="d-flex justify-content-center h-100">
-            <div class="card">
+            <div class="card text-center">
                 <div class="card-header">
-                    <h3>Login to Quiz Master</h3>
-
+                    <h2>Login to start</h2>
                 </div>
                 <div class="card-body">
                     <form id="login" method="post" action="/login">
@@ -39,43 +43,28 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Username" id="logusername" name="logusername">
+                            <input type="text" class="form-control" placeholder="Username" id="logusername"
+                                name="logusername">
 
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control" placeholder="password" id="logpassword" name="logpassword">
+                            <input type="password" class="form-control" placeholder="password" id="logpassword"
+                                name="logpassword">
                         </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                <div class="card-footer">
-                    <div class="d-flex justify-content-center links" id="register">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form><br>
+                    <div class="card-footer">
                         <p>Don't have an account? <a href="signup.html"> Need to SIGNUP?</a> </p>
-                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-  <!-- <script type="text/javascript">
-    var usernameField = document.getElementById('logusername')
-    var passwordField = document.getElementById('logpassword')
-    var form = document.getElementById('login')
-    function validateMyForm() {
-      if (usernameField.value === '' || passwordField === '') {
-        alert("Enter password");
-      } else{
-        form.submit()
-      }
-    }
-
-  </script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="./js/login.js"></script>
 </body>
 
