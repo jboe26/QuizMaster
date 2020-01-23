@@ -29,13 +29,6 @@ var store = new MongoDBStore({
 store.on('error', function(error) {
   console.log(error);
 });
-// var db = mongoose.connection;
-// console.log(db);
-//handle mongo error
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function () {
-//   // we're connected!
-// });
 
 //use sessions for tracking logins
 app.use(session({
@@ -54,6 +47,15 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 app.use(express.static(__dirname + "/public"));
+
+function requireLogin(req, res, next) {
+  if (req.session.user == null){
+// if user is not logged-in redirect back to login page //
+      res.redirect('/');
+  }   else{
+      next();
+  }
+};
 
 // ----------------- ROUTES --------------------
 
@@ -112,6 +114,22 @@ app.post("/login", function (req, res, next) {
   });
 }); 
 
+// Get route for main page
+app.get('/main', requireLogin, function (req, res, next) {
+  console.log("hitting")
+  User.findById(req.session.userId)
+    .exec(function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        if (user === null) {
+          var err = new Error('Not authorized! Go back!');
+          err.status = 400;
+          return next(err);
+        }
+      }
+    });
+  });
 // GET route after registering
 // app.get('/profile', function (req, res, next) {
 //   User.findById(req.session.userId)
