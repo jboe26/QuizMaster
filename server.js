@@ -42,7 +42,7 @@ app.use(express.json());
 
 // Make public a static folder
 app.use(express.static("public"));
-app.use(express.static(__dirname + "/public/profile.html"));
+app.use(express.static(__dirname + "/public"));
 
 // ----------------- ROUTES --------------------
 
