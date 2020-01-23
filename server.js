@@ -31,7 +31,7 @@ mongoose.connect(connStr, { useNewUrlParser: true }, function (err) {
 // app.use(session({
 //   secret: 'work hard',
 //   resave: true,
-//   saveUninitialized: false,
+//   saveUninitialized: false,// don't create session until something stored
 //   store: new MongoStore({
 //     mongooseConnection: db
 //   })
