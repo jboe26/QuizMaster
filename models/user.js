@@ -58,7 +58,7 @@ UserSchema.methods.incLoginAttempts = function (callback) {
 var reasons = UserSchema.statics.failedLogin = {
     NOT_FOUND: 0,
     PASSWORD_INCORRECT: 1,
-    MAX_ATTEMPTS: 2
+    MAX_ATTEMPTS: 5
 };
 
 //authenticate input against database
