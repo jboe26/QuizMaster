@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--Custom styles-->
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Gochi+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <title>Quizzly App</title>
+</head>
+<body>    
+    <span style="display: inline;">
+        <a href="./main.html"><button style="height:40px;color: black;background-color: lightgray">Back to Home</button></a>
+    </span>
+    <div class="container">
+        <br><br>
+
+        <div class="jumbotron">
+            <h1 id="idQ" value="science">Science Quiz</h1>
+            <a href="science.html"> <button type="button" id="restart"
+                class="btn btn-secondary">Restart</button></a>
+            <form method="post" action="/category">
+                <input type="hidden" id="slider_input" name="slider" value="" />
+            </form>
+        </div>
+
+        <div class="qs">
+            <button type="button" id="start" class="btn btn-dark">Start Quiz</button>
+            <div class="question" id="q1">
+                <p>Question 1: What weather tool is used to measure air pressure?</p>
+                <!-- correct--> <input type="radio" name="answer1" id="1" value="barometer">A: Barometer <br>
+                <input type="radio" name="answer1" value="seismometer">B: Seismometer <br>
+                <input type="radio" name="answer1" value="thermometer">C: Thermometer <br>
+                <input type="radio" name="answer1" value="anemometer">D: Anemometer <br>
+                <button type="button" id="next1" class="btn btn-dark">Next</button>
+            </div>
+            <div class="question" id="q2">
+                <p>Question 2: The appearance of unusually warm water off the pacific coast of Peru and Ecuador is called:.</p>
+                <input type="radio" name="answer2" id="1" value="elnino">A: El Nino <br>
+                <input type="radio" name="answer2" value="lanina">B: La Nina <br>
+                <input type="radio" name="answer2" value="globalwarming">C: Global Warming <br>
+                <input type="radio" name="answer2" value="elguapo">D: El Guapo <br>
+                <button type="button" id="next2" class="btn btn-dark">Next</button>
+            </div>
+            <div class="question" id="q3">
+                <p>Question 3: What are the highest clouds in the atmosphere?</p>
+                <input type="radio" name="answer3" value="nimbus"> A: Nimbus <br>
+                <input type="radio" name="answer3" value="cirrus">B: Cirrus <br>
+                <input type="radio" name="answer3" value="stratus">C: Stratus <br>
+               <!-- correct-->  <input type="radio" name="answer3" id="1" value="cumulous">D: Cumulous <br>
+               <button type="button" id="next3" class="btn btn-dark">Next</button>
+            </div>
+            <div class="question" id="q4">
+                <p>Question 4: What is generally true about the weather near the equator?</p>
+                <input type="radio" name="answer4" value="itsalwaysverydry">A: It's always very dry <br>
+                <input type="radio" name="answer4" value="itismuchcooler">B: It is much cooler <br>
+                <!-- correct--> <input type="radio" name="answer4" id="1" value="itismuchwarmer">C: It is much warmer <br>
+                <input type="radio" name="answer4" value="thetemperaturefluctuatesmuchmorethroughouttheyear">D: The temperature fluctuates much more throughout the year <br>
+                <button type="button" id="next4" class="btn btn-dark">Next</button> </div>
+            <div class="question" id="q5">
+                <p>Question 5: In the United States, weather patterns mostly move from:</p>
+                <!-- correct--> <input type="radio" name="answer5" id="1" value="westtoeast">A: West to East <br>
+                <input type="radio" name="answer5" value="easttowest">B: East to West <br>
+                <input type="radio" name="answer5" value="southtonorth">C: South to North <br>
+                <input type="radio" name="answer5" value="northtosouth">D: North to South <br>
+                <button type="button" id="next5" class="btn btn-dark">Next</button>
+            </div>
+            <div class="question" id="q6">
+                <p>Question 6: Why do currents like the Gulf Stream travel near the surface of the water?</p>
+                <input type="radio" name="answer6" value="thewateriscoldandlessdense">A: The water is cold and less dense <br>
+                <input type="radio" name="answer6" value="thewateriscoldandmoredoense">B: The water is cold and more dense <br>
+                <!--correct--> <input type="radio" name="answer6" id="1" value="thewateriswarmandlessdense">C: The water is warm and less dense <br>
+                <input type="radio" name="answer6" value="thewateriswarmandmoredense">D: The water is warm and more dense <br>
+                <button type="button" id="next6" class="btn btn-dark">Next</button>
+            </div>
+            <div class="question" id="q7">
+                <p>Question 7: If it is Summer in the United States, what season is it in Australia in the Southern Hemisphere?</p>
+                <!--correct--> <input type="radio" name="answer7" id="1" value="winter">A: Winter <br>
+                <input type="radio" name="answer7" value="summer">B: Summer <br>
+                <input type="radio" name="answer7" value="spring">C: Spring <br>
+                <input type="radio" name="answer7" value="fall">D: Fall <br>
+                <button type="button" id="next7" class="btn btn-dark">Next</button>
+            </div>
+            <div class="question" id="q8">
+                <p>Question 8: Gusts of wind are caused by:</p>
+                <input type="radio" name="answer8" value="themovementoftrees">A: The movement of Trees <br>
+                <!--correct--> <input type="radio" name="answer8" id="1" value="changesinairpressureforhightolow">B: Changes in Air Pressure for High to Low <br>
+                <input type="radio" name="answer8" value="presenceofclouds">C: Presence of clouds <br>
+                <input type="radio" name="answer8" value="changesinairpressureforlowtohigh">D: Changes in Air Pressure for Low to High <br>
+                <button type="button" id="next8" class="btn btn-dark">Next</button>
+            </div>
+            <div class="question" id="q9">
+                <p>Question 9: The westerlies are the prevailing winds which are caused predominantly by the:</p>
+                <!--correct--> <input type="radio" name="answer9" id="1" value="jetstream">A: Jet Stream <br>
+                <input type="radio" name="answer9" value="gulfstream">B: Gulf Stream <br>
+                <input type="radio" name="answer9" value="windstream">C: Wind Stream <br>
+                <input type="radio" name="answer9" value="waterstream">D: Water Stream <br>
+                <button type="button" id="next9" class="btn btn-dark">Next</button>
+            </div>
+            <div class="question" id="q10">
+                <p>Question 10: What type of cloud appears almost as as a blanket of clouds in the sky?</p>
+                <input type="radio" name="answer10" value="cumulous">A: Cumulous <br>
+                <input type="radio" name="answer10" value="nimbus">B: Nimbus <br>
+                <!--correct--> <input type="radio" name="answer10" id="1" value="stratus">C: Stratus <br>
+                <input type="radio" name="answer8" value="cirrus">D: Cirrus <br>
+                <button type="button" id="done" class="btn btn-secondary">Grade My Answers!</button>
+            </div>
+            <div class ="form-group" id="result">
+                <h2 id="correctAnswers"></h2>
+                <h2 id="incorrectAnswers"></h2>
+                <!-- <h2 id="missed"></h2> -->
+                <h1 id="score"></h1>
+            </div>
+                <form method="post" action="/score">
+                    <input type="hidden" id="score_input" name="hidden" value="" />
+                </form>
+               <a href="main.html"> <button  type="button" id="home" class="btn btn-secondary">Go to homepage</button></a>
+               <a href="science.html"> <button type="button" id="restartEnd"
+                class="btn btn-secondary">Take Quiz Again?</button></a>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/answers.js"></script>
+</body>
+
+</html>
