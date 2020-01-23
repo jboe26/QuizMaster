@@ -37,6 +37,18 @@ UserSchema.pre('save', function (next) {
     });
 });
 
+UserSchema.methods.setSession = function (user, req, callback) {
+    //specify any desired session data in here
+    sessionData = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+    }
+    //pass temporary session object to req.session
+    req.session.user = sessionData;
+    callback(true);
+}
+
 UserSchema.methods.incLoginAttempts = function (callback) {
     // if we have a previous lock that has expired, restart at 1
     if (this.lockUntil && this.lockUntil < Date.now()) {
