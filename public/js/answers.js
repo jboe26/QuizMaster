@@ -74,6 +74,7 @@ $(document).ready(function () {
         };
         function markCorrect() {
             correctAnswers++;
+            // Changed score to increment by 50 to conform to 2 question demo
             score += 50;
             console.log("HITCO")
         };
@@ -110,7 +111,7 @@ $(document).ready(function () {
 
         //    Give html elements text from variables linked to quiz performance
         cA = document.getElementById("correctAnswers");
-        catxt = document.createTextNode("You got " + correctAnswers + " questions right.");
+        catxt = document.createTextNode("You got " + correctAnswers + " questions right.   ");
         cA.appendChild(catxt);
         iA = document.getElementById("incorrectAnswers");
         iatxt = document.createTextNode("You got " + incorrectAnswers + " questions wrong.");
