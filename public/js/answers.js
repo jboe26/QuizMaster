@@ -10,50 +10,50 @@ $(document).ready(function () {
         $("#q1").hide();
         $("#q2").show();
     });
-    $("#next2").on("click", function (event) {
-        $("#q2").hide();
-        $("#q3").show();
-    });
-    $("#next3").on("click", function (event) {
-        $("#q3").hide();
-        $("#q4").show();
-    });
-    $("#next4").on("click", function (event) {
-        $("#q4").hide();
-        $("#q5").show();
-    });
-    $("#next5").on("click", function (event) {
-        $("#q5").hide();
-        $("#q6").show();
-    });
-    $("#next6").on("click", function (event) {
-        $("#q6").hide();
-        $("#q7").show();
-    });
-    $("#next7").on("click", function (event) {
-        $("#q7").hide();
-        $("#q8").show();
-    });
-    $("#next8").on("click", function (event) {
-        $("#q8").hide();
-        $("#q9").show();
-    });
-    $("#next9").on("click", function (event) {
-        $("#q9").hide();
-        $("#q10").show();
-    });
+    // $("#next2").on("click", function (event) {
+    //     $("#q2").hide();
+    //     $("#q3").show();
+    // });
+    // $("#next3").on("click", function (event) {
+    //     $("#q3").hide();
+    //     $("#q4").show();
+    // });
+    // $("#next4").on("click", function (event) {
+    //     $("#q4").hide();
+    //     $("#q5").show();
+    // });
+    // $("#next5").on("click", function (event) {
+    //     $("#q5").hide();
+    //     $("#q6").show();
+    // });
+    // $("#next6").on("click", function (event) {
+    //     $("#q6").hide();
+    //     $("#q7").show();
+    // });
+    // $("#next7").on("click", function (event) {
+    //     $("#q7").hide();
+    //     $("#q8").show();
+    // });
+    // $("#next8").on("click", function (event) {
+    //     $("#q8").hide();
+    //     $("#q9").show();
+    // });
+    // $("#next9").on("click", function (event) {
+    //     $("#q9").hide();
+    //     $("#q10").show();
+    // });
     // Answer Key
     var answers = {
         "answer1": "1",
         "answer2": "1",
-        "answer3": "1",
-        "answer4": "1",
-        "answer5": "1",
-        "answer6": "1",
-        "answer7": "1",
-        "answer8": "1",
-        "answer9": "1",
-        "answer10": "1"
+        // "answer3": "1",
+        // "answer4": "1",
+        // "answer5": "1",
+        // "answer6": "1",
+        // "answer7": "1",
+        // "answer8": "1",
+        // "answer9": "1",
+        // "answer10": "1"
     };
 
     $("#done").on("click", function (event) {
@@ -63,7 +63,7 @@ $(document).ready(function () {
         var incorrectAnswers = 0;
         var score = 0;
         // Hides question10
-        $("#q10").hide();
+        $("#q2").hide();
         $("#restart").hide();
         // $("#result").show();
         // Functions to increment results variables
@@ -74,7 +74,7 @@ $(document).ready(function () {
         };
         function markCorrect() {
             correctAnswers++;
-            score += 10;
+            score += 50;
             console.log("HITCO")
         };
 
