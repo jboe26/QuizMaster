@@ -1,14 +1,15 @@
+
 .title{ 
     margin-bottom: 10px; 
     text-align:center; 
     width: 210px; 
-    color:green; 
+    background-color:lightgray; 
     border: solid black 2px; 
     } 
 
     input[type="button"] 
     { 
-    background-color:green; 
+    background-color:lightgray; 
     color: black; 
     border: solid black 2px; 
     width:100% 
@@ -23,7 +24,12 @@
     table{
         padding: 10px;
       border: 1px solid black; 
+      align-content: center;
     }
     #calculator{
         display: none;
+        /* width:100%;
+        background-color: lightgray;
+        padding: 10px;
+        border: 1px solid black; */
     }
