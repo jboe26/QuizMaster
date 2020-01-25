@@ -37,12 +37,13 @@ UserSchema.pre('save', function (next) {
     });
 });
 
-UserSchema.methods.setSession = function (user, req, callback) {
+UserSchema.statics.setSession = function (user, req, callback) {
+    var user =this;
     //specify any desired session data in here
     sessionData = {
         firstName: user.firstName,
         lastName: user.lastName,
-        email: user.email,
+        username: user.username,
     }
     //pass temporary session object to req.session
     req.session.user = sessionData;

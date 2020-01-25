@@ -1,9 +1,12 @@
 var express = require("express");
 var logger = require("morgan");
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+// var cookieParser = require('cookie-parser');
+// const path = require('path');
 var User = require('./models/user.js');
-var session = require('express-session');
-var MongoDBStore = require('connect-mongodb-session')(session);
+var session = require('client-sessions');
+// var session = require('express-session');
+// var MongoDBStore = require('connect-mongodb-session')(session);
 // var bodyParser = require('body-parser');
 var app = express();
 
@@ -19,43 +22,38 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, function (err) {
   if (err) throw err;
   console.log('Successfully connected to MongoDB');
 });
-
-var store = new MongoDBStore({
-  uri: MONGODB_URI,
-  collection: 'users'
-});
+// app.use(cookieParser());
+// var store = new MongoDBStore({
+//   uri: MONGODB_URI,
+//   collection: 'users'
+// });
 
 // Catch errors
-store.on('error', function(error) {
-  console.log(error);
-});
+// store.on('error', function (error) {
+//   console.log(error);
+// });
 
 //use sessions for tracking logins
 app.use(session({
+  cookieName: 'session',
   secret: 'work hard',
   cookie: {
     maxAge: 1000 * 60 * 60 * 12 // 12 hours
   },
-  store: store,
   resave: true,
   saveUninitialized: false,// don't create session until something stored
+  activeDuration: 5 * 60 * 1000,
 }));
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Make public a static folder
-app.use(express.static("public"));
+// app.use(express.static("public"));
 app.use(express.static(__dirname + "/public"));
+app.use( express.static((__dirname + '/protectedViews'))); //notice I DO have auth middleware
+// app.use('/logReg', express.static(path.join(__dirname, '/protectedViews')))
 
-function requireLogin(req, res, next) {
-  if (req.session.user == null){
-// if user is not logged-in redirect back to login page //
-      res.redirect('/');
-  }   else{
-      next();
-  }
-};
 
 // ----------------- ROUTES --------------------
 
@@ -65,14 +63,14 @@ app.post("/signup", function (req, res, next) {
     var err = new Error('Passwords do not match.');
     err.status = 400;
     res.send("passwords dont match");
+    res.redirect("/signup.html")
     return next(err);
-  }
+  } 
   // Create a new user using req.body
   User.create(req.body)
     .then(function () {
-      // If saved successfully, send the the new User document to the client
-      // Redirect to html page
-     res.redirect("/main.html");
+      // If saved successfully, Redirect to html page
+      res.redirect("/login.html");
     })
     .catch(function (err) {
       // If an error occurs, send the error to the client
@@ -82,54 +80,85 @@ app.post("/signup", function (req, res, next) {
 
 // Login Route to post our form submission to mongoDB via mongoose
 app.post("/login", function (req, res, next) {
-  // attempt to authenticate user
+  console.log("attempt to authenticate user")
   User.authenticate(req.body.logusername, req.body.logpassword, function (error, user, reason) {
-    console.log('server.js', req.body.logusername);
-    console.log('server.js', req.body.logpassword);
     if (error || !user) {
       var reasons = User.failedLogin;
-        switch (reason) {
-            case reasons.NOT_FOUND:
-              console.log("not found");
-              res.sendStatus(404);
-              break;
-            case reasons.PASSWORD_INCORRECT:
-              console.log("incorrect password");
-              res.sendStatus(400);
-                // note: these cases are usually treated the same - don't tell
-                // the user *why* the login failed, only that it did
-                break;
-            case reasons.MAX_ATTEMPTS:
-              console.log("too many attempts");
-              res.sendStatus(429);
-                // send email or otherwise notify user that account is
-                // temporarily locked
-                break;
-        }
+      switch (reason) {
+        case reasons.NOT_FOUND:
+          console.log("not found");
+          res.sendStatus(404);
+          res.redirect("/login.html");
+          break;
+        case reasons.PASSWORD_INCORRECT:
+          console.log("incorrect password");
+          res.sendStatus(400);
+          res.redirect("/login.html");
+          // note: these cases are usually treated the same - don't tell
+          // the user *why* the login failed, only that it did
+          break;
+        case reasons.MAX_ATTEMPTS:
+          console.log("too many attempts");
+          res.sendStatus(429);
+          res.redirect("/login.html");
+          // send email or otherwise notify user that account is
+          // temporarily locked
+          break;
+      }
       // return next(error);
     } else {
       console.log('login success');
-      return res.redirect("/main.html");
+      // req.session.user = user;
+      return res.redirect("/main");
     }
   });
-}); 
+});
 
-// Get route for main page
-app.get('/main', requireLogin, function (req, res, next) {
-  console.log("hitting")
-  User.findById(req.session.userId)
-    .exec(function (error, user) {
-      if (error) {
-        return next(error);
-      } else {
-        if (user === null) {
-          var err = new Error('Not authorized! Go back!');
-          err.status = 400;
-          return next(err);
-        }
+app.use(function(req, res, next) {
+  if (req.session && req.session.user) {
+    User.findOne({ username: req.session.user.username }, function(err, user) {
+      if (user) {
+        req.user = user;
+        delete req.user.password; // delete the password from the session
+        req.session.user = user;  //refresh the session value
+        res.locals.user = user;
       }
+      // finishing processing the middleware and run the route
+      next();
     });
-  });
+  } else {
+    next();
+  }
+});
+// TO DO: req.user is undefined. 
+function requireLogin (req, res, next) {
+  console.log(req.user)
+  if (!req.user) {
+    res.redirect('/login.html');
+  } else {
+    next();
+  }
+};
+
+app.get("/main", requireLogin, function(err, res){
+  res.render("main.html");
+});
+// Get route for main page
+// app.get('protectedViews/main', requireLogin, function (req, res, next) {
+//   console.log("hitting")
+//   User.findById(req.session.userId)
+//     .exec(function (error, user) {
+//       if (error) {
+//         return next(error);
+//       } else {
+//         if (user === null) {
+//           var err = new Error('Not authorized! Go back!');
+//           err.status = 400;
+//           return next(err);
+//         }
+//       }
+//     });
+//   });
 // GET route after registering
 // app.get('/profile', function (req, res, next) {
 //   User.findById(req.session.userId)
