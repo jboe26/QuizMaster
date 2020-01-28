@@ -112,6 +112,7 @@ app.use(function(req, res, next) {
     next();
   }
 });
+app.use(express.static(__dirname + "/protectedViews/js"));
 // TO DO: req.user is undefined. 
 function requireLogin (req, res, next) {
   console.log("^^^^^^^^^^^^^^^^^^",req.user)
@@ -145,6 +146,12 @@ app.get('/profile', requireLogin, function (req, res, next) {
         }
       }
     });
+});
+
+app.get("/js/answers", requireLogin, function(err, res){
+  // console.log("Ready to render protected view");
+  res.sendFile('answers.js', {root : __dirname + '/protectedViews/js'});
+  // res.redirect("/main.html");
 });
 
 app.get("/english", requireLogin, function(err, res){
