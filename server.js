@@ -152,9 +152,12 @@ app.get("/main", requireLogin, function(err, res){
 //     });
 // });
 
-app.get("/profile", requireLogin, function(err, res){
+app.get("/profile", requireLogin, function(req, res, next){
   // console.log("Ready to render protected view");
-  res.sendFile('profile.html', {root : __dirname + '/protectedViews'});
+  // res.sendFile('profile.html', {root : __dirname + '/protectedViews'});
+  User.findById(req.session.user).exec(function(error, user){
+    return res.send("<div> '<a type='button' href='/logout'>Logout</a>' '<a type='button' href='/main'>HOME</a>' </div>" + '<h2>Firstname: </h2>' + user.firstname + '<h2>Lastname: </h2>' + user.lastname + '<h2>Username: </h2>' + user.username + '<h2>Email: </h2>' + user.email + '<br>')
+  })
 });
 
 app.get("/english", requireLogin, function(err, res){
