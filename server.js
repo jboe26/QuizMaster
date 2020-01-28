@@ -122,7 +122,11 @@ function requireLogin (req, res, next) {
     next();
   }
 };
-
+function userInfo(req, res, next){
+  cTitle = document.getElementById("cTitle");
+  cTtxt = document.createTextNode("You got " + user.username + " questions right.   ");
+  cTitle.appendChild(cTtxt);
+}
 app.get("/main", requireLogin, function(err, res){
   // console.log("Ready to render protected view");
   res.sendFile('main.html', {root : __dirname + '/protectedViews'});
@@ -130,22 +134,27 @@ app.get("/main", requireLogin, function(err, res){
 });
 
 // GET route after registering
-app.get('/profile', requireLogin, function (req, res, next) {
-  User.findById(req.session.user)
-    .exec(function (error, user) {
-      if (error) {
-        return next(error);
-      } else {
-        if (user === null) {
-          var err = new Error('Not authorized! Go back!');
-          err.status = 400;
-          return next(err);
-        } else {
-          res.sendFile('profile.html', {root : __dirname + '/protectedViews'});
-          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
-        }
-      }
-    });
+// app.get('/profile', requireLogin, function (req, res, next) {
+//   User.findById(req.session.user)
+//     .exec(function (error, user) {
+//       if (error) {
+//         return next(error);
+//       } else {
+//         if (user === null) {
+//           var err = new Error('Not authorized! Go back!');
+//           err.status = 400;
+//           return next(err);
+//         } else {
+//           res.sendFile('main.html', {root : __dirname + '/protectedViews'});
+//           return res.send('<h1 class="card-title">Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+//         }
+//       }
+//     });
+// });
+
+app.get("/profile", requireLogin, function(err, res){
+  // console.log("Ready to render protected view");
+  res.sendFile('profile.html', {root : __dirname + '/protectedViews'});
 });
 
 app.get("/english", requireLogin, function(err, res){
@@ -174,20 +183,13 @@ app.get("/science", requireLogin, function(err, res){
   // res.redirect("/main.html");
 });
 
-
-// // GET for logout logout
-// app.get('/logout', function (req, res, next) {
-//   if (req.session) {
-//     // delete session object
-//     req.session.destroy(function (err) {
-//       if (err) {
-//         return next(err);
-//       } else {
-//         return res.redirect('/');
-//       }
-//     });
-//   }
-// });
+ // GET for logout logout
+app.get('/logout', function(req, res){
+  req.session.destroy(function(){
+     console.log("user logged out.")
+  });
+  res.redirect('/login.html');
+});
 
 var PORT = process.env.PORT || 8080;
 app.listen(PORT, function () {
