@@ -148,12 +148,6 @@ app.get('/profile', requireLogin, function (req, res, next) {
     });
 });
 
-app.get("/js/answers", requireLogin, function(err, res){
-  // console.log("Ready to render protected view");
-  res.sendFile('answers.js', {root : __dirname + '/protectedViews/js'});
-  // res.redirect("/main.html");
-});
-
 app.get("/english", requireLogin, function(err, res){
   // console.log("Ready to render protected view");
   res.sendFile('english.html', {root : __dirname + '/protectedViews/quizViews'});
