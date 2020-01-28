@@ -1,13 +1,8 @@
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require('mongoose');
-// var cookieParser = require('cookie-parser');
-// const path = require('path');
 var User = require('./models/user.js');
 var session = require('client-sessions');
-// var session = require('express-session');
-// var MongoDBStore = require('connect-mongodb-session')(session);
-// var bodyParser = require('body-parser');
 var app = express();
 
 // Use morgan logger for logging requests
@@ -22,16 +17,6 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, function (err) {
   if (err) throw err;
   console.log('Successfully connected to MongoDB');
 });
-// app.use(cookieParser());
-// var store = new MongoDBStore({
-//   uri: MONGODB_URI,
-//   collection: 'users'
-// });
-
-// Catch errors
-// store.on('error', function (error) {
-//   console.log(error);
-// });
 
 //use sessions for tracking logins
 app.use(session({
@@ -49,11 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Make public a static folder
-// app.use(express.static("public"));
 app.use(express.static(__dirname + "/public"));
-app.use( express.static(__dirname + '/protectedViews')); //notice I DO have auth middleware
-// app.use('/logReg', express.static(path.join(__dirname, '/protectedViews')))
-
 
 // ----------------- ROUTES --------------------
 
@@ -142,43 +123,28 @@ function requireLogin (req, res, next) {
 };
 
 app.get("/main", requireLogin, function(err, res){
-  console.log("Ready to render protected view");
-  // res.sendFile('main.html', {root : __dirname + '/protectedViews'});
-  res.render("protectedViews/main.html");
+  // console.log("Ready to render protected view");
+  res.sendFile('main.html', {root : __dirname + '/protectedViews'});
+  // res.sendFile("protectedViews/main.html");
 });
-// Get route for main page
-// app.get('protectedViews/main', requireLogin, function (req, res, next) {
-//   console.log("hitting")
-//   User.findById(req.session.userId)
-//     .exec(function (error, user) {
-//       if (error) {
-//         return next(error);
-//       } else {
-//         if (user === null) {
-//           var err = new Error('Not authorized! Go back!');
-//           err.status = 400;
-//           return next(err);
-//         }
-//       }
-//     });
-//   });
+
 // GET route after registering
-// app.get('/profile', function (req, res, next) {
-//   User.findById(req.session.userId)
-//     .exec(function (error, user) {
-//       if (error) {
-//         return next(error);
-//       } else {
-//         if (user === null) {
-//           var err = new Error('Not authorized! Go back!');
-//           err.status = 400;
-//           return next(err);
-//         } else {
-//           return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
-//         }
-//       }
-//     });
-// });
+app.get('/profile', requireLogin, function (req, res, next) {
+  User.findById(req.session.userId)
+    .exec(function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        if (user === null) {
+          var err = new Error('Not authorized! Go back!');
+          err.status = 400;
+          return next(err);
+        } else {
+          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+        }
+      }
+    });
+});
 
 
 // // GET for logout logout
