@@ -125,12 +125,12 @@ function requireLogin (req, res, next) {
 app.get("/main", requireLogin, function(err, res){
   // console.log("Ready to render protected view");
   res.sendFile('main.html', {root : __dirname + '/protectedViews'});
-  // res.sendFile("protectedViews/main.html");
+  // res.redirect("/main.html");
 });
 
 // GET route after registering
 app.get('/profile', requireLogin, function (req, res, next) {
-  User.findById(req.session.userId)
+  User.findById(req.session.user)
     .exec(function (error, user) {
       if (error) {
         return next(error);
@@ -140,10 +140,37 @@ app.get('/profile', requireLogin, function (req, res, next) {
           err.status = 400;
           return next(err);
         } else {
+          res.sendFile('profile.html', {root : __dirname + '/protectedViews'});
           return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
         }
       }
     });
+});
+
+app.get("/english", requireLogin, function(err, res){
+  // console.log("Ready to render protected view");
+  res.sendFile('english.html', {root : __dirname + '/protectedViews/quizViews'});
+  // res.redirect("/main.html");
+});
+app.get("/geography", requireLogin, function(err, res){
+  // console.log("Ready to render protected view");
+  res.sendFile('geography.html', {root : __dirname + '/protectedViews/quizViews'});
+  // res.redirect("/main.html");
+});
+app.get("/history", requireLogin, function(err, res){
+  // console.log("Ready to render protected view");
+  res.sendFile('history.html', {root : __dirname + '/protectedViews/quizViews'});
+  // res.redirect("/main.html");
+});
+app.get("/math", requireLogin, function(err, res){
+  // console.log("Ready to render protected view");
+  res.sendFile('math.html', {root : __dirname + '/protectedViews/quizViews'});
+  // res.redirect("/main.html");
+});
+app.get("/science", requireLogin, function(err, res){
+  // console.log("Ready to render protected view");
+  res.sendFile('science.html', {root : __dirname + '/protectedViews/quizViews'});
+  // res.redirect("/main.html");
 });
 
 

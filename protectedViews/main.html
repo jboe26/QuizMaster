@@ -28,32 +28,35 @@
                 <span class="navbar-text">
                     <h1>Quiz Master</h1>
                 </span>
-                <form class="form-inline">
-                    <a class="navbar-brand" href="./profile.html">Profile</a>
+                <form action="/profile" method="get" class="form-inline">
+                    <!-- <a class="navbar-brand" href="profile.html">Profile</a> -->
+                    <button type="submit" class="btn btn-primary">Profile</button>
+                    <!-- <a type="button" href="/profile">Profile</a> -->
                 </form>
             </nav>
         </div>
     </header>
     <div id="main-container" class="container">
         <p class="instructions">Click on a button when you are ready to take that quiz</p>
-
+<form action="/" method="get">
         <ul>
-            <li><a href="./quizViews/math.html" class="round purple">Math<span class="round">Get your calculator
+            <li><a href="/math" class="round purple">Math<span class="round">Get your calculator
                         ready.</span></a></li>
-            <li><a href="./quizViews/science.html" class="round red">Science<span class="round">Eliminate all
+            <li><a href="/science" class="round red">Science<span class="round">Eliminate all
                         distractions first! </span></a></li>
             </li>
-            <li><a href="./quizViews/english.html" class="round yellow">English<span class="round">You got
+            <li><a href="/english" class="round yellow">English<span class="round">You got
                         this!</span></a></li>
         </ul>
 
         <ul>
-            <li><a href="./quizViews/geography.html" class="round blue">Geography<span class="round">Let's take a trip
+            <li><a href="/geography" class="round blue">Geography<span class="round">Let's take a trip
                         around the
                         world.</span></a></li>
-            <li><a href="./quizViews/history.html" class="round green">History<span class="round">Ready to travel back
+            <li><a href="/history" class="round green">History<span class="round">Ready to travel back
                         in time?</span></a></li>
         </ul>
+    </form>
     </div>
     <!-- <script>
     User.findById(req.session.userId)
