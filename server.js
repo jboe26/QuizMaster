@@ -67,23 +67,18 @@ app.post("/login", function (req, res, next) {
       var reasons = User.failedLogin;
       switch (reason) {
         case reasons.NOT_FOUND:
-          console.log("not found");
-          res.sendStatus(404);
+          // res.sendStatus(404);
           res.redirect("/login.html");
           break;
         case reasons.PASSWORD_INCORRECT:
-          console.log("incorrect password");
-          res.sendStatus(400);
+          // res.sendStatus(400);
           res.redirect("/login.html");
           // note: these cases are usually treated the same - don't tell
           // the user *why* the login failed, only that it did
           break;
         case reasons.MAX_ATTEMPTS:
-          console.log("too many attempts");
-          res.sendStatus(429);
+          // res.sendStatus(429);
           res.redirect("/login.html");
-          // send email or otherwise notify user that account is
-          // temporarily locked
           break;
       }
       // return next(error);
@@ -112,10 +107,8 @@ app.use(function(req, res, next) {
     next();
   }
 });
-app.use(express.static(__dirname + "/protectedViews/js"));
-// TO DO: req.user is undefined. 
+app.use(express.static(__dirname + "/protectedViews/js")); 
 function requireLogin (req, res, next) {
-  console.log("^^^^^^^^^^^^^^^^^^",req.user)
   if (!req.user) {
     res.redirect('/login.html');
   } else {
@@ -128,62 +121,29 @@ function userInfo(req, res, next){
   cTitle.appendChild(cTtxt);
 }
 app.get("/main", requireLogin, function(err, res){
-  // console.log("Ready to render protected view");
   res.sendFile('main.html', {root : __dirname + '/protectedViews'});
-  // res.redirect("/main.html");
 });
 
-// GET route after registering
-// app.get('/profile', requireLogin, function (req, res, next) {
-//   User.findById(req.session.user)
-//     .exec(function (error, user) {
-//       if (error) {
-//         return next(error);
-//       } else {
-//         if (user === null) {
-//           var err = new Error('Not authorized! Go back!');
-//           err.status = 400;
-//           return next(err);
-//         } else {
-//           res.sendFile('main.html', {root : __dirname + '/protectedViews'});
-//           return res.send('<h1 class="card-title">Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
-//         }
-//       }
-//     });
-// });
-
 app.get("/profile", requireLogin, function(req, res, next){
-  // console.log("Ready to render protected view");
-  // res.sendFile('profile.html', {root : __dirname + '/protectedViews'});
   User.findById(req.session.user).exec(function(error, user){
-    return res.send("<div> '<a type='button' href='/logout'>Logout</a>' '<a type='button' href='/main'>HOME</a>' </div>" + '<h2>Firstname: </h2>' + user.firstname + '<h2>Lastname: </h2>' + user.lastname + '<h2>Username: </h2>' + user.username + '<h2>Email: </h2>' + user.email + '<br>')
+    return res.send("<span style='float:right; font-size: 32px;'> <a type='button' style='background-color: lightgray' href='/logout' text-size='65px'>Logout</a>    <a type='button' style='background-color: lightgray' href='/main'>HOME</a> </span>" + '<h2>Firstname: </h2>' + user.firstname + '<h2>Lastname: </h2>' + user.lastname + '<h2>Username: </h2>' + user.username + '<h2>Email: </h2>' + user.email + '<br>')
   })
 });
 
 app.get("/english", requireLogin, function(err, res){
-  // console.log("Ready to render protected view");
   res.sendFile('english.html', {root : __dirname + '/protectedViews/quizViews'});
-  // res.redirect("/main.html");
 });
 app.get("/geography", requireLogin, function(err, res){
-  // console.log("Ready to render protected view");
   res.sendFile('geography.html', {root : __dirname + '/protectedViews/quizViews'});
-  // res.redirect("/main.html");
 });
 app.get("/history", requireLogin, function(err, res){
-  // console.log("Ready to render protected view");
   res.sendFile('history.html', {root : __dirname + '/protectedViews/quizViews'});
-  // res.redirect("/main.html");
 });
 app.get("/math", requireLogin, function(err, res){
-  // console.log("Ready to render protected view");
   res.sendFile('math.html', {root : __dirname + '/protectedViews/quizViews'});
-  // res.redirect("/main.html");
 });
 app.get("/science", requireLogin, function(err, res){
-  // console.log("Ready to render protected view");
   res.sendFile('science.html', {root : __dirname + '/protectedViews/quizViews'});
-  // res.redirect("/main.html");
 });
 
  // GET for logout logout

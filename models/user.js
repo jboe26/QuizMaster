@@ -12,24 +12,21 @@ var UserSchema = new Schema({
     email: { type: String, required: true },
     username: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true },
+    isAdmin:{ type: Boolean, default: false},
     loginAttempts: { type: Number, required: true, default: 0 },
     lockUntil: { type: Number }
 });
 
 UserSchema.pre('save', function (next) {
     var user = this;
-
     // only hash the password if it has been modified (or is new)
     if (!user.isModified('password')) return next();
-
     // generate a salt
     bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
         if (err) return next(err);
-
         // hash the password using our new salt
         bcrypt.hash(user.password, salt, function (err, hash) {
             if (err) return next(err);
-
             // override the cleartext password with the hashed one
             user.password = hash;
             next();
@@ -78,15 +75,12 @@ var reasons = UserSchema.statics.failedLogin = {
 UserSchema.statics.authenticate = function (username, password, callback) {
     this.findOne({ username: username }).exec(function (err, user) {
         if (err) {
-            console.log("^^^^^^^^^^^^^^^^")
             return callback(err);
-        } 
-       
+        }
         // make sure the user exists
         else if (!user) {
             return callback(null, null, reasons.NOT_FOUND);
         }
-
         // check if the account is currently locked
         if (user.isLocked) {
             // just increment login attempts if account is already locked
@@ -96,7 +90,6 @@ UserSchema.statics.authenticate = function (username, password, callback) {
             });
         }
 
-        console.log("!!!!!!!!!!!!!!!!!")
         bcrypt.compare(password, user.password, function (err, result) {
             if (result === true) {
                 console.log("login success")
@@ -114,7 +107,6 @@ UserSchema.statics.authenticate = function (username, password, callback) {
                     return callback(null, user);
                 });
             } else {
-                console.log("incorrect password")
                 user.incLoginAttempts(function (err) {
                     if (err) return callback(err);
                     return callback(null, null, reasons.PASSWORD_INCORRECT);
@@ -123,5 +115,4 @@ UserSchema.statics.authenticate = function (username, password, callback) {
         });
     });
 };
-
 module.exports = mongoose.model('User', UserSchema);
