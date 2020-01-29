@@ -1,4 +1,3 @@
-https://www.geeksforgeeks.org/html-calculator/
 # Quiz_Master
 <p>A Mongoose, Express, Node authentication app. Simply done for learning purposes.</p>
 
@@ -179,6 +178,7 @@ node server.js
 <p>These are the two sources I used to create this application:
 Primary Source: <a href="https://www.tutorialspoint.com/expressjs/expressjs_authentication.htm">https://www.tutorialspoint.com/expressjs/expressjs_authentication.htm</a></p>
 <p>Secondary source:<a href="https://stormpath.com/blog/everything-you-ever-wanted-to-know-about-node-dot-js-sessions">https://stormpath.com/blog/everything-you-ever-wanted-to-know-about-node-dot-js-sessions</a></p>
+<p>Resource for calculator: https://www.geeksforgeeks.org/html-calculator/</p><br>
 <p>This application was a remake of a previous group project. If you would like to see that go here:<a href="https://github.com/jboe26/quizzly">https://github.com/jboe26/quizzly</a>.</p>
 <p>If you would like to see how I set up authentication go here: <a href="https://github.com/CeaserSP/Mongoose_Authentication" target="_blank">https://github.com/CeaserSP/Mongoose_Authentication</a>. Use in conjunction with the secondary source above.</p>
 
