@@ -143,7 +143,7 @@ node server.js
 ### Welcome to Quiz Master
 <img src="./image/Main.png">
 <br>
-<img src="../image/Login.png">
+<img src="./image/Login.png">
 <img src="./image/Math.png">
 <img src="./image/MathQuiz.png">
 <img src="./image/MathCalc.png">
