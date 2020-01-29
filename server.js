@@ -3,6 +3,7 @@ var logger = require("morgan");
 var mongoose = require('mongoose');
 var User = require('./models/user.js');
 var session = require('client-sessions');
+var PORT = process.env.PORT || 8080;
 var app = express();
 
 // Use morgan logger for logging requests
@@ -12,11 +13,11 @@ app.use(logger("dev"));
 // mongoose.connect(MONGODB_URI, {},  function(error) {
 //     console.log("$$$$$$$$$$$$$$$$$$$",error)
 //   });
-var MONGODB_URI = 'mongodb://localhost:27017/mon_auth';
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, function (err) {
-  if (err) throw err;
-  console.log('Successfully connected to MongoDB');
-});
+// var MONGODB_URI = ('mongodb:<dbuser>:<dbpassword>@ds157276.mlab.com:57276/heroku_349kxrlp' || 'mongodb://localhost:27017/mon_auth');
+// mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, function (err) {
+//   if (err) throw err;
+//   console.log('Successfully connected to MongoDB', MONGODB_URI);
+// });
 
 //use sessions for tracking logins
 app.use(session({
@@ -35,6 +36,12 @@ app.use(express.json());
 
 // Make public a static folder
 app.use(express.static(__dirname + "/public"));
+
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/mon_auth";
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
+console.log(MONGODB_URI);
+
 
 // ----------------- ROUTES --------------------
 
@@ -154,7 +161,7 @@ app.get('/logout', function(req, res){
   res.redirect('/login.html');
 });
 
-var PORT = process.env.PORT || 8080;
+
 app.listen(PORT, function () {
   console.log("App listening on PORT " + PORT);
 });
