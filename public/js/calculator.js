@@ -1,5 +1,5 @@
 $("#calcButton").on('click', function(event){
-    $("#calculator").show()
+    $("#calculator").toggle()
 })
 //function that display value 
 function dis(val) 
