@@ -44,8 +44,8 @@ To set up this application locally on your computer, perform the following steps
 ### <a name="clone-repository"></a> 1. Clone the repository
 The first step is to clone the project repository to a local directory on your computer. To clone the repository, run the following commands:
 <pre>
-  git clone https://github.com/CeaserSP/QuizMaster.git
-  cd QuizMaster
+  git clone https://github.com/jboe26/quizapp.git
+  cd quizapp
 </pre>
 
 #### <a name="structure-of-project"></a> Structure of the project
@@ -174,13 +174,3 @@ node server.js
 * Allow admin to get user results
 * Add user results to profile page.
 
-## <a name="Acknowledgments"></a> Acknowledgments
-<p>These are the two sources I used to create this application:
-Primary Source: <a href="https://www.tutorialspoint.com/expressjs/expressjs_authentication.htm">https://www.tutorialspoint.com/expressjs/expressjs_authentication.htm</a></p>
-<p>Secondary source:<a href="https://stormpath.com/blog/everything-you-ever-wanted-to-know-about-node-dot-js-sessions">https://stormpath.com/blog/everything-you-ever-wanted-to-know-about-node-dot-js-sessions</a></p>
-<p>Resource for calculator: https://www.geeksforgeeks.org/html-calculator/</p><br>
-<p>This application was a remake of a previous group project. If you would like to see that go here:<a href="https://github.com/jboe26/quizzly">https://github.com/jboe26/quizzly</a>.</p>
-<p>If you would like to see how I set up authentication go here: <a href="https://github.com/CeaserSP/Mongoose_Authentication" target="_blank">https://github.com/CeaserSP/Mongoose_Authentication</a>. Use in conjunction with the secondary source above.</p>
-
-## <a name ="Issues"></a> Issues
-<p>If you find an issue while using the app or have a request, <a href="https://github.com/CeaserSP/QuizMaster/issues" target="_blank">log the issue or request here</a>. These issues will be addressed in a future code update.</p>
